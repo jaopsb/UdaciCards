@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native'
 import { Constants } from 'expo'
-import { RootNavigator } from './navigators'
 
 function StatusBar({ backgroundColor, ...props }) {
   return (

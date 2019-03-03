@@ -1,4 +1,4 @@
-import { TabNavigator, StackNavigator } from 'react-navigation'
+import { createTabNavigator, createStackNavigator } from 'react-navigation'
 import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons'
 import DecksView from './views/DecksView'
 import AddDeck from './views/AddDeck'
@@ -6,7 +6,7 @@ import DeckInfo from './views/DeckInfo'
 import AddCard from './views/AddCard'
 import QuizView from './views/QuizView'
 
-const Tab = TabNavigator({
+const Tab = createTabNavigator({
   Decks: {
     screen: DecksView,
     navigationOptions: {
@@ -43,7 +43,7 @@ const Tab = TabNavigator({
     }
   })
 
-export const RootNavigator = StackNavigator({
+export const RootNavigator = createStackNavigator({
   Home: {
     screen: Tab
   },
