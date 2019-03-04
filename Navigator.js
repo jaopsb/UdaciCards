@@ -61,10 +61,9 @@ const RootNavigator = createStackNavigator({
     path: 'Deck/:title',
     screen: DeckInfo,
     navigationOptions: ({ navigation }) => ({
-      title: `${navigation.params.title}'s Deck`,
+      title: `${navigation.state.params.title}`,
       headerStyle: {
         backgroundColor: '#f4511e',
-
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -74,16 +73,20 @@ const RootNavigator = createStackNavigator({
     })
   },
   AddCard: {
+    path: 'AddCard/:title',
     screen: AddCard,
-    path: 'addCard/:title',
     title: 'Add Card',
-    navigationOptions: {
-      headerTintColor: 'white',
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.title}`,
       headerStyle: {
-        backgroundColor: 'black',
+        backgroundColor: '#f4511e',
       },
-      headerBackTitle: null
-    }
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 40
+      },
+    })
   },
   Quiz: {
     screen: QuizView,

@@ -19,18 +19,20 @@ class AddDeck extends React.Component {
   handleContinue = (title) => {
     const { navigation, decks } = this.props
 
-    if (decks[title]) alert('This title already exists!')
+    if (!decks[title]) {
+      Alert.alert(
+        'Confirm Title',
+        `Confirm ${title} as the title of the New Deck?`,
+        [
+          { text: 'Confirm', onPress: () => navigation.navigate('AddCard', { title, newDeck: true }) },
+          { text: 'Cancel', style: 'cancel' }
 
-    Alert.alert(
-      'Confirm Title',
-      `Confirm ${title} as the title of the New Deck?`,
-      [
-        { text: 'Confirm', onPress: () => navigation.navigate('addCard', { title }) },
-        { text: 'Cancel', style: 'cancel' }
-
-      ],
-      { cancelable: false },
-    );
+        ],
+        { cancelable: false },
+      );
+    } else {
+      alert('This title already exists!')
+    }
   }
 
   render() {
@@ -38,6 +40,7 @@ class AddDeck extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Create a New Deck</Text>
+        <Text>{JSON.stringify(this.props.navigation)}</Text>
         <TextInput style={styles.input}
           underlineColorAndroid="transparent"
           placeholder="Deck's Title"
