@@ -18,8 +18,8 @@ class AddDeck extends React.Component {
 
   handleContinue = (title) => {
     const { navigation, decks } = this.props
-    if (decks[title])
-      alert('This title already exists!')
+
+    if (decks[title]) alert('This title already exists!')
 
     Alert.alert(
       'Confirm Title',
