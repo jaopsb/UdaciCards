@@ -2,9 +2,12 @@ import React from 'react';
 import { StyleSheet, View, StatusBar } from 'react-native'
 import { Constants } from 'expo'
 import { createStore } from 'redux'
-import { connect, Provider } from 'react-redux'
+import { Provider } from 'react-redux'
 
+import configureStore from './redux/store'
 import Navigator from './Navigator'
+
+const store = configureStore()
 
 function FlashStatusBar({ backgroundColor, ...props }) {
   return (
@@ -17,19 +20,12 @@ function FlashStatusBar({ backgroundColor, ...props }) {
 export default class App extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <FlashStatusBar backgroundColor={'red'} />
-        <Navigator />
-      </View>
+      <Provider store={store}>
+        <View style={{ flex: 1 }}>
+          <FlashStatusBar backgroundColor={'red'} />
+          <Navigator />
+        </View>
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

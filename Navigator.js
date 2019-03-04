@@ -23,9 +23,6 @@ const Tab = createBottomTabNavigator({
     }
   }
 }, {
-    navigationOptions: {
-      header: null
-    },
     tabBarOptions: {
       activeTintColor: 'red',
       style: {
@@ -46,17 +43,35 @@ const Tab = createBottomTabNavigator({
 
 const RootNavigator = createStackNavigator({
   Home: {
-    screen: Tab
+    screen: Tab,
+    navigationOptions: {
+      title: 'Decks',
+      headerStyle: {
+        backgroundColor: '#f4511e',
+
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 40
+      },
+    }
   },
   DeckInfo: {
+    path: 'Deck/:title',
     screen: DeckInfo,
-    navigationOptions: {
-      headerTintColor: 'white',
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.params.title}'s Deck`,
       headerStyle: {
-        backgroundColor: 'black',
-        headerBackTitle: null
-      }
-    }
+        backgroundColor: '#f4511e',
+
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 40
+      },
+    })
   },
   AddCard: {
     screen: AddCard,
