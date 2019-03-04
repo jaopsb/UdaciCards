@@ -1,4 +1,5 @@
-import { createTabNavigator, createStackNavigator } from 'react-navigation'
+import React from 'react'
+import { createAppContainer, createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons'
 import DecksView from './views/DecksView'
 import AddDeck from './views/AddDeck'
@@ -6,7 +7,7 @@ import DeckInfo from './views/DeckInfo'
 import AddCard from './views/AddCard'
 import QuizView from './views/QuizView'
 
-const Tab = createTabNavigator({
+const Tab = createBottomTabNavigator({
   Decks: {
     screen: DecksView,
     navigationOptions: {
@@ -17,7 +18,7 @@ const Tab = createTabNavigator({
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
-      tabBarLabel: 'AddDeck',
+      tabBarLabel: 'Add Deck',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square-o' size={30} color={tintColor} />
     }
   }
@@ -26,7 +27,7 @@ const Tab = createTabNavigator({
       header: null
     },
     tabBarOptions: {
-      activeTintColor: 'blue',
+      activeTintColor: 'red',
       style: {
         height: 50,
         backgroundColor: 'white',
@@ -43,7 +44,7 @@ const Tab = createTabNavigator({
     }
   })
 
-export const RootNavigator = createStackNavigator({
+const RootNavigator = createStackNavigator({
   Home: {
     screen: Tab
   },
@@ -80,3 +81,6 @@ export const RootNavigator = createStackNavigator({
     }
   }
 })
+
+
+export default createAppContainer(RootNavigator)

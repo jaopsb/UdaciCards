@@ -23,4 +23,4 @@ class DecksView extends React.Component {
 const mapStateToProps = ({ decks }) => (
   decks
 )
-export default connect(mapStateToProps)(DecksView)
+export default DecksView

@@ -1,8 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, StatusBar } from 'react-native'
 import { Constants } from 'expo'
+import { createStore } from 'redux'
+import { connect, Provider } from 'react-redux'
 
-function StatusBar({ backgroundColor, ...props }) {
+import Navigator from './Navigator'
+
+function FlashStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
@@ -10,13 +14,12 @@ function StatusBar({ backgroundColor, ...props }) {
   )
 }
 
-
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor={'black'} barStyle='light-content' />
-        <Text>APP</Text>
+      <View style={{ flex: 1 }}>
+        <FlashStatusBar backgroundColor={'red'} />
+        <Navigator />
       </View>
     );
   }
