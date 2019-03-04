@@ -75,6 +75,7 @@ const RootNavigator = createStackNavigator({
   },
   AddCard: {
     screen: AddCard,
+    path: 'addCard/:title',
     title: 'Add Card',
     navigationOptions: {
       headerTintColor: 'white',

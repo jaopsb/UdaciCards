@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+import { withNavigation } from 'react-navigation'
 
 class Decks extends React.Component {
 
@@ -8,7 +9,9 @@ class Decks extends React.Component {
   renderItem = ({ item }) => (
     <View style={styles.deck}>
       <Text style={styles.item}>{item.title}</Text>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => this.props.navigation.navigate('Deck', { title: item.title })}
+      >
         <Text>Info</Text>
       </TouchableOpacity>
     </View>
@@ -37,4 +40,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Decks
+export default withNavigation(Decks)
