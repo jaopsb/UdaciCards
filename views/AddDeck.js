@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { connect } from 'react-redux'
-import { Input } from 'react-native-elements';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const TITLE = 'TITLE'
@@ -40,7 +39,6 @@ class AddDeck extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Create a New Deck</Text>
-        <Text>{JSON.stringify(this.props.navigation)}</Text>
         <TextInput style={styles.input}
           underlineColorAndroid="transparent"
           placeholder="Deck's Title"

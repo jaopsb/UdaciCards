@@ -27,8 +27,6 @@ const dummy = {
   }
 }
 
-
-
 export default {
   getDecks: () => (
     AsyncStorage.getItem(FLASHCARD_KEY)
