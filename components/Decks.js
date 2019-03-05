@@ -7,14 +7,12 @@ class Decks extends React.Component {
   keyExtractor = (item, index) => item.title
 
   renderItem = ({ item }) => (
-    <View style={styles.deck}>
-      <Text style={styles.item}>{item.title}</Text>
-      <TouchableOpacity
-        onPress={() => this.props.navigation.navigate('Deck', { title: item.title })}
-      >
-        <Text>Info</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('DeckInfo', { title: item.title })}>
+      <View style={styles.deck}>
+        <Text style={styles.item}>{item.title}</Text>
+        <Text style={styles.questionsText}>{item.questions.length} question{item.questions.length > 1 ? 's' : ''}</Text>
+      </View>
+    </TouchableOpacity>
   )
 
   render() {
@@ -30,13 +28,17 @@ class Decks extends React.Component {
 
 const styles = StyleSheet.create({
   deck: {
-    paddingVertical: 10,
+    paddingTop: 20,
+    alignItems: 'center',
     borderBottomColor: 'black',
     borderBottomWidth: 1,
   },
   item: {
     fontSize: 50,
     color: 'black',
+  },
+  questionsText: {
+    color: "gray"
   }
 })
 

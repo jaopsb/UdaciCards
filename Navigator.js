@@ -29,14 +29,12 @@ const Tab = createBottomTabNavigator({
         height: 50,
         backgroundColor: 'white',
         shadowColor: 'rgba(0,0,0,0.24)',
-        shadowOffset
-          : {
+        shadowOffset: {
           width: 0,
           height: 3
         },
         shadowRadius: 6,
         shadowOpacity: 1
-
       }
     }
   })
@@ -45,7 +43,7 @@ const RootNavigator = createStackNavigator({
   Home: {
     screen: Tab,
     navigationOptions: {
-      title: 'Decks',
+      title: 'UdaciCards',
       headerStyle: {
         backgroundColor: '#f4511e',
 
@@ -58,7 +56,7 @@ const RootNavigator = createStackNavigator({
     }
   },
   DeckInfo: {
-    path: 'Deck/:title',
+    path: 'DeckInfo/:title',
     screen: DeckInfo,
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.title}`,

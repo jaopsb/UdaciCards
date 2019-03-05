@@ -18,6 +18,8 @@ class AddDeck extends React.Component {
   handleContinue = (title) => {
     const { navigation, decks } = this.props
 
+    if (title === '') return alert("The title can't be empty!")
+
     if (!decks[title]) {
       Alert.alert(
         'Confirm Title',
@@ -61,12 +63,12 @@ class AddDeck extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 23
+    flex: 1,
+    paddingHorizontal: 5,
   },
   title: {
-    width: '100%',
     fontSize: 30,
-    justifyContent: 'center'
+    alignItems: 'center'
   },
   input: {
     margin: 20,

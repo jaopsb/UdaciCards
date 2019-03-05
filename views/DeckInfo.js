@@ -1,14 +1,38 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { connect } from 'react-redux'
+import { View, Text, TouchableOpacity } from 'react-native'
 
 class DeckInfo extends React.Component {
   render() {
+    const { deck } = this.props
+    const length = deck.questions.length
+    console.log('Deck', deck)
     return (
       <View>
-        <Text>Deck Info</Text>
+        <Text>{deck.title}</Text>
+        {
+          length > 0 ?
+            <Text>{length} question{length > 1 ? 's' : ''}</Text> :
+            null
+        }
+
+        {/*TODO style for buttons*/}
+        <TouchableOpacity>
+          {/*TODO Navigate to QUIZ */}
+          <Text>Start Quiz</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          {/*TODO Navigate to Edit/AddCard*/}
+          <Text>Edit Deck</Text>
+        </TouchableOpacity>
       </View>
     )
   }
 }
 
-export default DeckInfo
+//TODO Styles
+const mapStateToProps = (state, { navigation }) => ({
+  deck: state[navigation.state.params.title]
+})
+
+export default connect(mapStateToProps)(DeckInfo)

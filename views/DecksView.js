@@ -11,24 +11,11 @@ class DecksView extends React.Component {
   }
 
   render() {
-    const { dispatch, decks } = this.props
+    const { decks } = this.props
 
     return (
       <View style={styles.container}>
         <Decks decks={decks} />
-        <TouchableOpacity
-          onPress={
-            () => {
-              dispatch(handleAddDeck(
-                {
-                  title: 'Toperson',
-                  questions: []
-                }
-              ))
-            }
-          }>
-          <Text>ADD DECK TEST</Text>
-        </TouchableOpacity>
       </View>
     )
   }
@@ -36,7 +23,7 @@ class DecksView extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+
   },
   label: {
     fontSize: 20,
