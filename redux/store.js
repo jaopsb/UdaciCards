@@ -6,11 +6,6 @@ import { FLASHCARD_KEY } from '../API'
 
 const configureStore = () => {
   const store = createStore(Reducer, Middleware);
-  /*
-    store.subscribe(() => {
-      AsyncStorage.setItem(FLASHCARD_KEY, JSON.stringify(store.getState()))
-    })
-  */
   return store;
 };
 

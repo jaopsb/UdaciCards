@@ -6,7 +6,6 @@ class DeckInfo extends React.Component {
   render() {
     const { deck } = this.props
     const length = deck.questions.length
-    console.log('Deck', deck)
     return (
       <View>
         <Text>{deck.title}</Text>

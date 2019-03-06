@@ -108,7 +108,7 @@ class AddCard extends React.Component {
   }
 
   render() {
-    const { newDeck } = this.props.navigation.state.params
+    //const { newDeck } = this.props.navigation.state.params
     const { questions } = this.state
 
     return (

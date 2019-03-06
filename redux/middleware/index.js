@@ -1,4 +1,5 @@
 import thunk from 'redux-thunk';
+import API from '../../API';
 import { applyMiddleware } from 'redux';
 
 const logger = (store) => (next) => (action) => {
@@ -10,4 +11,13 @@ const logger = (store) => (next) => (action) => {
   return returnValue
 }
 
-export default applyMiddleware(thunk, logger)
+const saver = (store) => (next) => (action) => {
+  console.log('entering saver middleware')
+  const returnValue = next(action)
+
+  API.setDecks(store.getState())//because we only use the decks reducer
+
+  return returnValue
+}
+
+export default applyMiddleware(thunk, saver)

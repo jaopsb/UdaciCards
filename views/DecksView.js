@@ -2,28 +2,44 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { View, StyleSheet, Text, AsyncStorage, TouchableOpacity } from 'react-native'
 import Decks from '../components/Decks'
-import { handleInitialData, handleAddDeck } from '../redux/actions';
+import { handleInitialData, handleAddDeck, handleInitialDataDummy } from '../redux/actions';
+import { isObjectEmpty } from '../API';
 
 class DecksView extends React.Component {
 
   componentDidMount() {
+    ///Dispatch dummy content
+    //this.props.dispatch(handleInitialDataDummy())
+
     this.props.dispatch(handleInitialData())
   }
 
   render() {
     const { decks } = this.props
-
+    console.log('Decks is empty?', isObjectEmpty(decks))
     return (
-      <View style={styles.container}>
-        <Decks decks={decks} />
+      <View>
+        {
+          isObjectEmpty(decks) ?
+            <View style={{ alignItems: 'center' }}>
+              <Text style={styles.textNoDecksTitle}>There's no Decks!</Text>
+              <Text style={styles.textNoDecksSubTItle}>Swipe right to create a new deck</Text>
+            </View> :
+            <Decks decks={decks} />
+        }
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-
+  textNoDecksTitle: {
+    fontSize: 30,
+    color: 'red'
+  },
+  textNoDecksSubTItle: {
+    fontSize: 20,
+    color: 'red'
   },
   label: {
     fontSize: 20,

@@ -2,6 +2,8 @@ import { AsyncStorage } from 'react-native'
 
 export const FLASHCARD_KEY = 'FLASH_CARDS'
 
+export const isObjectEmpty = (obj) => Object.entries(obj).length === 0 && obj.constructor === Object
+
 const dummy = {
   React: {
     title: 'React',
@@ -43,7 +45,7 @@ export default {
       .then(JSON.parse)
       .then(data => data)
   ),
-  setInitialDecks: () => (
+  setInitialDummyDecks: () => (
     AsyncStorage.setItem(FLASHCARD_KEY, JSON.stringify(dummy))
       .then(() => dummy)
   )

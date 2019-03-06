@@ -7,7 +7,9 @@ class Decks extends React.Component {
   keyExtractor = (item, index) => item.title
 
   renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => this.props.navigation.navigate('DeckInfo', { title: item.title })}>
+    <TouchableOpacity
+      key={item.title}
+      onPress={() => this.props.navigation.navigate('DeckInfo', { title: item.title })}>
       <View style={styles.deck}>
         <Text style={styles.item}>{item.title}</Text>
         <Text style={styles.questionsText}>{item.questions.length} question{item.questions.length > 1 ? 's' : ''}</Text>
@@ -17,6 +19,7 @@ class Decks extends React.Component {
 
   render() {
     const { decks } = this.props
+    console.log('decks component', decks)
     return (
       <FlatList
         data={Object.keys(decks).map(key => decks[key])}

@@ -13,9 +13,18 @@ export const addDeck = (deck) => ({
   deck
 })
 
+//dummy data
+export const handleInitialDataDummy = () => {
+  return function (dispatch) {
+    return API.setInitialDummyDecks()
+      .then(data => dispatch(receiveDecks(data)))
+      .then(({ decks }) => decks)
+  }
+}
+
 export const handleInitialData = () => {
   return function (dispatch) {
-    return API.setInitialDecks()
+    return API.getDecks()
       .then(data => dispatch(receiveDecks(data)))
       .then(({ decks }) => decks)
   }
@@ -23,7 +32,7 @@ export const handleInitialData = () => {
 
 export const handleAddDeck = (deck) => {
   return function (dispatch) {
-    return API.addDeck(deck)
-      .then(() => dispatch(addDeck(deck)))
+    return dispatch(addDeck(deck))
+      .then(() => deck)
   }
 }
