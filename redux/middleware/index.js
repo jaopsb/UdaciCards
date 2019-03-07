@@ -12,7 +12,6 @@ const logger = (store) => (next) => (action) => {
 }
 
 const saver = (store) => (next) => (action) => {
-  console.log('entering saver middleware')
   const returnValue = next(action)
 
   API.setDecks(store.getState())//because we only use the decks reducer

@@ -33,6 +33,5 @@ export const handleInitialData = () => {
 export const handleAddDeck = (deck) => {
   return function (dispatch) {
     return dispatch(addDeck(deck))
-      .then(() => deck)
   }
 }

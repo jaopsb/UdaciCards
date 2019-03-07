@@ -11,14 +11,16 @@ const emptyNewQuestion = {
 
 class AddCard extends React.Component {
   state = {
+    editting: false,
     title: '',
     questions: [],
     newQuestion: {}
   }
   componentDidMount() {
     const { title } = this.props.navigation.state.params
+    const { deck } = this.props
 
-    this.setState({ title })
+    this.setState({ title, questions: deck.questions })
   }
 
   changeTitleQuestion = (text) => {
@@ -40,8 +42,9 @@ class AddCard extends React.Component {
 
   addQuestion = () => {
     const { newQuestion, questions } = this.state
+    const { type } = this.props
 
-    if (questions.filter(quest => quest.question === newQuestion.question).length > 0) {
+    if (questions.filter(quest => quest.question === newQuestion.question).length > 0 && type === 'create') {
       Alert.alert(
         'OHH SNAP!',
         "There's already a question like this one!!",
@@ -57,11 +60,13 @@ class AddCard extends React.Component {
           {
             text: 'Hell yeah', onPress: () => {
 
-
               this.setState(prevState => (
                 {
                   ...prevState,
-                  questions: questions.concat(newQuestion),
+                  questions: [
+                    ...questions,
+                    newQuestion
+                  ],
                   newQuestion: emptyNewQuestion
                 }
               ))
@@ -71,6 +76,30 @@ class AddCard extends React.Component {
         ]
       )
     }
+  }
+
+  editQuestion = () => {
+    const { newQuestion, editting, questions } = this.state
+
+    Alert.alert(
+      'Confirm Question',
+      "Are you sure about that?",
+      [
+        {
+          text: 'Hell yeah', onPress: () => {
+            this.setState({
+              questions: [
+                ...questions,
+                newQuestion
+              ],
+              newQuestion: emptyNewQuestion,
+              editting: !editting,
+            })
+          }
+        },
+        { text: 'nope', style: 'cancel' }
+      ]
+    )
   }
 
   saveCard = () => {
@@ -97,7 +126,7 @@ class AddCard extends React.Component {
           onPress: () => {
 
             addDeck({ title, questions })
-              .then(() => navigation.navigate("Home"))
+            navigation.navigate("Home")
           }
         },
         {
@@ -107,9 +136,16 @@ class AddCard extends React.Component {
     )
   }
 
+  cancelQuestion = () => {
+    this.setState({ newQuestion: emptyNewQuestion, editting: false })
+  }
+
+  selectQuestion = (question) => {
+    this.setState({ newQuestion: question, editting: true })
+  }
+
   render() {
-    //const { newDeck } = this.props.navigation.state.params
-    const { questions } = this.state
+    const { questions, newQuestion, listUpdated, editting } = this.state
 
     return (
       <View style={styles.container}>
@@ -121,6 +157,7 @@ class AddCard extends React.Component {
           placeholder={`Question #${questions.length + 1}`}
           placeholderTextColor="gray"
           autoCapitalize="none"
+          value={newQuestion.question}
           onChangeText={this.changeTitleQuestion}
         />
         <TextInput
@@ -128,23 +165,36 @@ class AddCard extends React.Component {
           placeholder="Answer"
           placeholderTextColor="gray"
           autoCapitalize="none"
-          value={this.state.newQuestion.answer}
+          value={newQuestion.answer}
           onChangeText={this.changeAnswerQuestion}
         />
-        <TouchableOpacity
-          style={styles.submitContainer}
-          onPress={this.addQuestion}
-        >
-          <Text style={{ color: "white" }}>Add Question</Text>
-        </TouchableOpacity>
-
+        {
+          editting ?
+            <View>
+              <TouchableOpacity
+                style={styles.submitContainer}
+                onPress={this.editQuestion}>
+                <Text style={{ color: "white" }}>Edit Question</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={this.cancelQuestion}>
+                <Text style={{ color: "red", fontSize: 25 }}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+            :
+            <TouchableOpacity
+              style={styles.submitContainer}
+              onPress={this.addQuestion}>
+              <Text style={{ color: "white" }}>Add Question</Text>
+            </TouchableOpacity>
+        }
         {
           questions.length > 0 ?
             <TouchableOpacity
               style={styles.saveCard}
-              onPress={this.saveCard}
-            >
-              <Text>Save Cards</Text>
+              onPress={this.saveCard}>
+              <Text style={{ color: 'white' }}>Save Cards</Text>
             </TouchableOpacity>
             :
             null
@@ -152,10 +202,11 @@ class AddCard extends React.Component {
         <Text style={{ alignItems: 'center', fontWeight: 'bold', fontSize: 20, color: '#f4511e', paddingBottom: 5 }}>Questions Already</Text>
         {
           questions.length > 0 ?
-            <Questions questions={questions} /> :
+            <Questions
+              onSelect={this.selectQuestion}
+              questions={questions} /> :
             null
         }
-
       </View>
     )
   }
@@ -176,6 +227,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     padding: 10
   },
+  cancelButton: {
+    alignItems: 'center'
+  },
   saveCard: {
     alignItems: 'center',
     color: 'white',
@@ -187,13 +241,15 @@ const styles = StyleSheet.create({
   input: {
     margin: 15,
     height: 40,
+    padding: 5,
     borderColor: 'black',
     borderWidth: 1
   }
 })
 
-const mapStateToProps = (state) => ({
-  decks: state
+const mapStateToProps = (state, { navigation }) => ({
+  decks: state,
+  deck: state[navigation.state.params.title]
 })
 
 const mapDispatchToProps = (dispatch) => ({

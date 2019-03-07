@@ -16,12 +16,11 @@ class DecksView extends React.Component {
 
   render() {
     const { decks } = this.props
-    console.log('Decks is empty?', isObjectEmpty(decks))
     return (
       <View>
         {
           isObjectEmpty(decks) ?
-            <View style={{ alignItems: 'center' }}>
+            <View style={styles.container}>
               <Text style={styles.textNoDecksTitle}>There's no Decks!</Text>
               <Text style={styles.textNoDecksSubTItle}>Swipe right to create a new deck</Text>
             </View> :
@@ -33,6 +32,10 @@ class DecksView extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   textNoDecksTitle: {
     fontSize: 30,
     color: 'red'

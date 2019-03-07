@@ -19,7 +19,7 @@ class Decks extends React.Component {
 
   render() {
     const { decks } = this.props
-    console.log('decks component', decks)
+
     return (
       <FlatList
         data={Object.keys(decks).map(key => decks[key])}
@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   item: {
-    fontSize: 50,
+    fontSize: 40,
+    justifyContent: 'center',
+
     color: 'black',
   },
   questionsText: {

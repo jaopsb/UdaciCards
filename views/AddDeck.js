@@ -25,7 +25,7 @@ class AddDeck extends React.Component {
         'Confirm Title',
         `Confirm ${title} as the title of the New Deck?`,
         [
-          { text: 'Confirm', onPress: () => navigation.navigate('AddCard', { title, newDeck: true }) },
+          { text: 'Confirm', onPress: () => navigation.navigate('AddCard', { title, type: 'create' }) },
           { text: 'Cancel', style: 'cancel' }
 
         ],
@@ -60,32 +60,31 @@ class AddDeck extends React.Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingHorizontal: 5,
+    justifyContent: 'center'
   },
   title: {
+    justifyContent: 'center',
+    color: 'red',
     fontSize: 30,
-    alignItems: 'center'
   },
   input: {
     margin: 20,
+    padding: 5,
     height: 40,
     borderColor: 'black',
     borderWidth: 1
   },
   submitButton: {
+    margin: 20,
     backgroundColor: 'red',
-    justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
-    margin: 15,
-    height: 40,
+    padding: 10
   },
   submitButtonText: {
-    color: 'white'
+    color: 'white',
+    fontSize: 20
   }
 })
 

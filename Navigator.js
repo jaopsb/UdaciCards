@@ -18,6 +18,7 @@ const Tab = createBottomTabNavigator({
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
+      title: "Create Deck",
       tabBarLabel: 'Add Deck',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square-o' size={30} color={tintColor} />
     }
@@ -58,8 +59,8 @@ const RootNavigator = createStackNavigator({
   DeckInfo: {
     path: 'DeckInfo/:title',
     screen: DeckInfo,
-    navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.title}`,
+    navigationOptions: {
+      title: 'Deck Info',
       headerStyle: {
         backgroundColor: '#f4511e',
       },
@@ -68,7 +69,7 @@ const RootNavigator = createStackNavigator({
         fontWeight: 'bold',
         fontSize: 40
       },
-    })
+    }
   },
   AddCard: {
     path: 'AddCard/:title',
@@ -89,13 +90,17 @@ const RootNavigator = createStackNavigator({
   Quiz: {
     screen: QuizView,
     title: 'Add Card',
-    navigationOptions: {
-      headerTintColor: 'white',
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.title}'s Quiz`,
       headerStyle: {
-        backgroundColor: 'black',
+        backgroundColor: '#f4511e',
       },
-      headerBackTitle: null
-    }
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 30
+      },
+    })
   }
 })
 
