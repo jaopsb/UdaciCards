@@ -9,7 +9,8 @@
       "android"
     ],
     "ios": {
-      "bundleIdentifier": "com.JaoCompany.udacicards"
+      "bundleIdentifier": "com.JaoCompany.udacicards",
+      "supportsTablet": true
     },
     "android": {
       "package": "com.JaoCompany.udacicards"
@@ -27,9 +28,6 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    }
+    ]
   }
 }
