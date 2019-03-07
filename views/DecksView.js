@@ -8,9 +8,6 @@ import { isObjectEmpty } from '../API';
 class DecksView extends React.Component {
 
   componentDidMount() {
-    ///Dispatch dummy content
-    //this.props.dispatch(handleInitialDataDummy())
-
     this.props.dispatch(handleInitialData())
   }
 

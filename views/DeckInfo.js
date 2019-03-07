@@ -6,6 +6,7 @@ class DeckInfo extends React.Component {
   render() {
     const { deck } = this.props
     const length = deck.questions.length
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{deck.title}</Text>
@@ -14,12 +15,9 @@ class DeckInfo extends React.Component {
             <Text style={styles.questionText}>{length} question{length > 1 ? 's' : ''}</Text> :
             null
         }
-
-        {/*TODO style for buttons*/}
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Quiz', { title: deck.title })}
-          style={styles.quizButton}
-        >
+          style={styles.quizButton}>
           <Text style={styles.quizText}>Start Quiz</Text>
         </TouchableOpacity>
         <TouchableOpacity

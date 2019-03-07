@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation'
 
 class Questions extends React.Component {
 
-  keyExtractor = (item, index) => item.question
+  keyExtractor = (item, index) => item.id
 
   renderItem = (item, onSelect) => (
     <View key={item.question} style={styles.questionContainer}>

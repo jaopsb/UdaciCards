@@ -1,10 +1,12 @@
 import React from 'react'
 import { Alert, TextInput, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import uuid from 'uuid'
 import { connect } from 'react-redux'
 import { handleAddDeck } from '../redux/actions';
 import Questions from '../components/Questions';
 
 const emptyNewQuestion = {
+  id: '',
   question: '',
   answer: ''
 }
@@ -16,6 +18,14 @@ class AddCard extends React.Component {
     questions: [],
     newQuestion: {}
   }
+
+  componentWillReceiveProps(newProps) {
+    const { title } = this.props.navigation.state.params
+    const { deck } = newProps
+
+    this.setState({ title, questions: deck.questions })
+  }
+
   componentDidMount() {
     const { title } = this.props.navigation.state.params
     const { deck } = this.props
@@ -60,11 +70,13 @@ class AddCard extends React.Component {
           {
             text: 'Hell yeah', onPress: () => {
 
+              newQuestion.id = uuid()
+
               this.setState(prevState => (
                 {
                   ...prevState,
                   questions: [
-                    ...questions,
+                    ...prevState.questions,
                     newQuestion
                   ],
                   newQuestion: emptyNewQuestion
@@ -86,11 +98,15 @@ class AddCard extends React.Component {
       "Are you sure about that?",
       [
         {
-          text: 'Hell yeah', onPress: () => {
+          text: 'Hell yeah',
+          onPress: () => {
             this.setState({
               questions: [
-                ...questions,
-                newQuestion
+                ...questions.map(quest => (
+                  quest.id === newQuestion.id ?
+                    newQuestion :
+                    quest
+                ))
               ],
               newQuestion: emptyNewQuestion,
               editting: !editting,
@@ -145,7 +161,7 @@ class AddCard extends React.Component {
   }
 
   render() {
-    const { questions, newQuestion, listUpdated, editting } = this.state
+    const { questions, newQuestion, editting } = this.state
 
     return (
       <View style={styles.container}>
@@ -201,10 +217,12 @@ class AddCard extends React.Component {
         }
         <Text style={{ alignItems: 'center', fontWeight: 'bold', fontSize: 20, color: '#f4511e', paddingBottom: 5 }}>Questions Already</Text>
         {
-          questions.length > 0 ?
+          questions.length > 0
+            ?
             <Questions
               onSelect={this.selectQuestion}
-              questions={questions} /> :
+              questions={questions} />
+            :
             null
         }
       </View>
