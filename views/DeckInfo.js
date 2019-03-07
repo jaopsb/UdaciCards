@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Alert, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 class DeckInfo extends React.Component {
   render() {
@@ -23,6 +23,11 @@ class DeckInfo extends React.Component {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('AddCard', { title: deck.title, type: 'edit' })}>
           <Text style={styles.editButton}>Add Card</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => Alert.alert('WAIT', 'Feature coming soon', [{ text: "OK,I'll wait", style: 'cancel' }])}>
+          <Text style={styles.delButton}>Delete Deck</Text>
         </TouchableOpacity>
       </View>
     )
@@ -51,6 +56,10 @@ const styles = StyleSheet.create({
   editButton: {
     fontSize: 20,
     color: 'green'
+  },
+  delButton: {
+    fontSize: 15,
+    color: 'red'
   },
   quizButton: {
     alignItems: 'center',

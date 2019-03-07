@@ -8,6 +8,12 @@
       "ios",
       "android"
     ],
+    "ios": {
+      "bundleIdentifier": "com.JaoCompany.udacicards"
+    },
+    "android": {
+      "package": "com.JaoCompany.udacicards"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

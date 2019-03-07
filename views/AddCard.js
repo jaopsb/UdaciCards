@@ -10,7 +10,10 @@ const emptyNewQuestion = {
   question: '',
   answer: ''
 }
-
+const emptyDeck = {
+  title: '',
+  questions: []
+}
 class AddCard extends React.Component {
   state = {
     editting: false,
@@ -30,7 +33,11 @@ class AddCard extends React.Component {
     const { title } = this.props.navigation.state.params
     const { deck } = this.props
 
-    this.setState({ title, questions: deck.questions })
+    this.setState({
+      title,
+      questions: deck.questions
+
+    })
   }
 
   changeTitleQuestion = (text) => {
@@ -266,8 +273,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state, { navigation }) => ({
-  decks: state,
-  deck: state[navigation.state.params.title]
+  deck: state[navigation.state.params.title] ? state[navigation.state.params.title] : emptyDeck
 })
 
 const mapDispatchToProps = (dispatch) => ({
